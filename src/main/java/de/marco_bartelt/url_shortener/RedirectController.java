@@ -30,7 +30,9 @@ public class RedirectController {
         instance.setClickCount(instance.getClickCount() + 1);
         repository.save(instance);
 
-        return ResponseEntity.status(HttpStatus.FOUND)
+        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302
+        return ResponseEntity
+                .status(HttpStatus.FOUND)
                 .location(URI.create(url.get().getOriginal()))
                 .build();
     }

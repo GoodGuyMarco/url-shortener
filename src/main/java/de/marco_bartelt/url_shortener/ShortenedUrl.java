@@ -15,13 +15,16 @@ public class ShortenedUrl {
 
     private String shortId;
 
+    private String description;
+
     private Integer clickCount;
 
     public ShortenedUrl() {}
 
-    public ShortenedUrl(String original, String shortened) {
+    public ShortenedUrl(String original, String description) {
         this.original = original;
         this.shortId = ShortIdGenerator.generate();
+        this.description = description;
         this.clickCount = 0;
     }
 
@@ -47,6 +50,14 @@ public class ShortenedUrl {
 
     public void setShortId(String shortId) {
         this.shortId = shortId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getClickCount() {
