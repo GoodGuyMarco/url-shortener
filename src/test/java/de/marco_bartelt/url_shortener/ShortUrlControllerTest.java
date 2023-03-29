@@ -39,6 +39,16 @@ public class ShortUrlControllerTest {
   }
 
   @Test
+  public void testPostWithValidationErrors() throws Exception {
+    CreateShortenedUrlRequest request = new CreateShortenedUrlRequest();
+    String json = new ObjectMapper().writeValueAsString(request);
+
+    mockMvc
+        .perform(post("/url/").contentType(MediaType.APPLICATION_JSON).content(json))
+        .andExpect(status().isBadRequest());
+  }
+
+  @Test
   public void testDelete() throws Exception {
     when(repository.findById("short_url_id")).thenReturn(Optional.of(new ShortenedUrl()));
 
