@@ -13,7 +13,7 @@ public class UrlShortenerController {
 
   @Autowired private ShortenedUrlRepository repository;
 
-  @PostMapping("/create")
+  @PostMapping("/")
   @ResponseStatus(HttpStatus.CREATED)
   public void create(@Valid @RequestBody CreateShortenedUrlRequest body) {
     ShortenedUrl url = new ShortenedUrl(body.original, body.description);
@@ -45,7 +45,7 @@ public class UrlShortenerController {
     return url.get();
   }
 
-  @GetMapping("/list")
+  @GetMapping("/")
   public Iterable<ShortenedUrl> list() {
     return repository.findAll();
   }
