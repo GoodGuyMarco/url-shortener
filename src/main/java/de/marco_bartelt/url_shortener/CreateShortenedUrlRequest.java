@@ -4,9 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
 public class CreateShortenedUrlRequest {
-    @URL
-    public String original;
+  @URL public String original;
 
-    @NotBlank
-    public String description;
+  @NotBlank public String description;
 }

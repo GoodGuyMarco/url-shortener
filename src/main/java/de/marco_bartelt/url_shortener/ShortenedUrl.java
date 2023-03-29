@@ -7,64 +7,64 @@ import jakarta.persistence.Id;
 
 @Entity
 public class ShortenedUrl {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private String id;
 
-    private String original;
+  private String original;
 
-    private String shortId;
+  private String shortId;
 
-    private String description;
+  private String description;
 
-    private Integer clickCount;
+  private Integer clickCount;
 
-    public ShortenedUrl() {}
+  public ShortenedUrl() {}
 
-    public ShortenedUrl(String original, String description) {
-        this.original = original;
-        this.shortId = ShortIdGenerator.generate();
-        this.description = description;
-        this.clickCount = 0;
-    }
+  public ShortenedUrl(String original, String description) {
+    this.original = original;
+    this.shortId = ShortIdGenerator.generate();
+    this.description = description;
+    this.clickCount = 0;
+  }
 
-    public String getId() {
-        return id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public String getOriginal() {
-        return original;
-    }
+  public String getOriginal() {
+    return original;
+  }
 
-    public void setOriginal(String original) {
-        this.original = original;
-    }
+  public void setOriginal(String original) {
+    this.original = original;
+  }
 
-    public String getShortId() {
-        return shortId;
-    }
+  public String getShortId() {
+    return shortId;
+  }
 
-    public void setShortId(String shortId) {
-        this.shortId = shortId;
-    }
+  public void setShortId(String shortId) {
+    this.shortId = shortId;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public Integer getClickCount() {
-        return clickCount;
-    }
+  public Integer getClickCount() {
+    return clickCount;
+  }
 
-    public void setClickCount(Integer clickCount) {
-        this.clickCount = clickCount;
-    }
+  public void setClickCount(Integer clickCount) {
+    this.clickCount = clickCount;
+  }
 }
