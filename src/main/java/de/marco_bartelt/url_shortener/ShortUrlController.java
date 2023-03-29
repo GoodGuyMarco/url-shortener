@@ -9,44 +9,44 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController()
 @RequestMapping("/url")
-public class UrlShortenerController {
+public class ShortUrlController {
 
-  @Autowired private ShortenedUrlRepository repository;
+  @Autowired private ShortUrlRepository repository;
 
   @PostMapping("/")
   @ResponseStatus(HttpStatus.CREATED)
-  public void create(@Valid @RequestBody CreateShortenedUrlRequest body) {
-    ShortenedUrl url = new ShortenedUrl(body.original, body.description);
+  public void create(@Valid @RequestBody CreateShortUrlRequest body) {
+    ShortUrl url = new ShortUrl(body.original, body.description);
 
     repository.save(url);
   }
 
   @DeleteMapping("/{id}")
   public void delete(@PathVariable String id) {
-    Optional<ShortenedUrl> url = repository.findById(id);
+    Optional<ShortUrl> url = repository.findById(id);
 
     if (url.isEmpty()) {
       throw new ResponseStatusException(
-          HttpStatus.NOT_FOUND, String.format("Shortened URL by ID '%s' not found", id));
+          HttpStatus.NOT_FOUND, String.format("Short URL by ID '%s' not found", id));
     }
 
     repository.delete(url.get());
   }
 
   @GetMapping("/{id}")
-  public ShortenedUrl get(@PathVariable String id) {
-    Optional<ShortenedUrl> url = repository.findById(id);
+  public ShortUrl get(@PathVariable String id) {
+    Optional<ShortUrl> url = repository.findById(id);
 
     if (url.isEmpty()) {
       throw new ResponseStatusException(
-          HttpStatus.NOT_FOUND, String.format("Shortened URL by ID '%s' not found", id));
+          HttpStatus.NOT_FOUND, String.format("Short URL by ID '%s' not found", id));
     }
 
     return url.get();
   }
 
   @GetMapping("/")
-  public Iterable<ShortenedUrl> list() {
+  public Iterable<ShortUrl> list() {
     return repository.findAll();
   }
 }

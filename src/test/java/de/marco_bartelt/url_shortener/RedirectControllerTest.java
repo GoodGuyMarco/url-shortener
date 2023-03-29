@@ -17,11 +17,11 @@ public class RedirectControllerTest {
 
   @Autowired private MockMvc mockMvc;
 
-  @MockBean private ShortenedUrlRepository repository;
+  @MockBean private ShortUrlRepository repository;
 
   @Test
   public void testRedirect() throws Exception {
-    ShortenedUrl url = new ShortenedUrl();
+    ShortUrl url = new ShortUrl();
     url.setOriginal("https://marco-bartelt.de");
     url.setShortId("short_id");
     url.setClickCount(0);

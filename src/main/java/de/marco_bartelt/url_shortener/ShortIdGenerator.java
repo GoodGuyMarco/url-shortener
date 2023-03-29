@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
 
+// TODO: Chat GPT did this, lul.
 public class ShortIdGenerator {
   private static final SecureRandom random = new SecureRandom();
 

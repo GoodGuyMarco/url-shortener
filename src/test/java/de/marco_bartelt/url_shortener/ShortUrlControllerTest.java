@@ -18,16 +18,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-@WebMvcTest(UrlShortenerController.class)
+@WebMvcTest(ShortUrlController.class)
 public class ShortUrlControllerTest {
 
   @Autowired private MockMvc mockMvc;
 
-  @MockBean private ShortenedUrlRepository repository;
+  @MockBean private ShortUrlRepository repository;
 
   @Test
   public void testPost() throws Exception {
-    CreateShortenedUrlRequest request = new CreateShortenedUrlRequest();
+    CreateShortUrlRequest request = new CreateShortUrlRequest();
     request.original = "https://marco-bartelt.de";
     request.description = "A website made with Gatsby and Tailwind CSS.";
 
@@ -40,7 +40,7 @@ public class ShortUrlControllerTest {
 
   @Test
   public void testPostWithValidationErrors() throws Exception {
-    CreateShortenedUrlRequest request = new CreateShortenedUrlRequest();
+    CreateShortUrlRequest request = new CreateShortUrlRequest();
     String json = new ObjectMapper().writeValueAsString(request);
 
     mockMvc
@@ -50,7 +50,7 @@ public class ShortUrlControllerTest {
 
   @Test
   public void testDelete() throws Exception {
-    when(repository.findById("short_url_id")).thenReturn(Optional.of(new ShortenedUrl()));
+    when(repository.findById("short_url_id")).thenReturn(Optional.of(new ShortUrl()));
 
     mockMvc.perform(delete("/url/{id}", "short_url_id")).andExpect(status().isOk());
   }
@@ -64,7 +64,7 @@ public class ShortUrlControllerTest {
 
   @Test
   public void testGet() throws Exception {
-    ShortenedUrl url = new ShortenedUrl();
+    ShortUrl url = new ShortUrl();
     url.setId("id");
     url.setShortId("short_id");
     url.setOriginal("https://marco-bartelt.de");
@@ -91,21 +91,21 @@ public class ShortUrlControllerTest {
 
   @Test
   public void testGetAll() throws Exception {
-    ShortenedUrl a = new ShortenedUrl();
+    ShortUrl a = new ShortUrl();
     a.setId("id");
     a.setShortId("short_id");
     a.setOriginal("https://marco-bartelt.de");
     a.setDescription("Lorem ipsum dolor amet.");
     a.setClickCount(0);
 
-    ShortenedUrl b = new ShortenedUrl();
+    ShortUrl b = new ShortUrl();
     b.setId("id");
     b.setShortId("short_id");
     b.setOriginal("https://marco-bartelt.de");
     b.setDescription("Lorem ipsum dolor amet.");
     b.setClickCount(0);
 
-    List<ShortenedUrl> urls = List.of(a, b);
+    List<ShortUrl> urls = List.of(a, b);
 
     when(repository.findAll()).thenReturn(urls);
 

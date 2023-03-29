@@ -11,18 +11,18 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController()
 public class RedirectController {
 
-  @Autowired private ShortenedUrlRepository repository;
+  @Autowired private ShortUrlRepository repository;
 
   @GetMapping("/{shortId}")
   public ResponseEntity<Object> redirect(@PathVariable String shortId) {
-    Optional<ShortenedUrl> url = repository.findByShortId(shortId);
+    Optional<ShortUrl> url = repository.findByShortId(shortId);
 
     if (url.isEmpty()) {
       throw new ResponseStatusException(
-          HttpStatus.NOT_FOUND, String.format("Shortened URL by ID '%s' not found", shortId));
+          HttpStatus.NOT_FOUND, String.format("URL by short ID '%s' not found", shortId));
     }
 
-    ShortenedUrl instance = url.get();
+    ShortUrl instance = url.get();
     instance.setClickCount(instance.getClickCount() + 1);
     repository.save(instance);
 

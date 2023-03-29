@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class ShortenedUrl {
+public class ShortUrl {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private String id;
@@ -19,9 +19,9 @@ public class ShortenedUrl {
 
   private Integer clickCount;
 
-  public ShortenedUrl() {}
+  public ShortUrl() {}
 
-  public ShortenedUrl(String original, String description) {
+  public ShortUrl(String original, String description) {
     this.original = original;
     this.shortId = ShortIdGenerator.generate();
     this.description = description;
