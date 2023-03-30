@@ -28,6 +28,10 @@ public class ShortUrl {
     this.clickCount = 0;
   }
 
+  public void visit() {
+    this.clickCount += 1;
+  }
+
   public String getId() {
     return id;
   }

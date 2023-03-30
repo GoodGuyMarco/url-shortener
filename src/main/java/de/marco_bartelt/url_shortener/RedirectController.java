@@ -1,8 +1,6 @@
 package de.marco_bartelt.url_shortener;
 
 import java.net.URI;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,24 +9,24 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController()
 public class RedirectController {
 
-  @Autowired private ShortUrlRepository repository;
+  private final ShortUrlService service;
+
+  public RedirectController(ShortUrlService service) {
+    this.service = service;
+  }
 
   @GetMapping("/{shortId}")
   public ResponseEntity<Object> redirect(@PathVariable String shortId) {
-    Optional<ShortUrl> url = repository.findByShortId(shortId);
+    ShortUrl url = service.getByShortId(shortId);
 
-    if (url.isEmpty()) {
+    if (url == null) {
       throw new ResponseStatusException(
           HttpStatus.NOT_FOUND, String.format("URL by short ID '%s' not found", shortId));
     }
 
-    ShortUrl instance = url.get();
-    instance.setClickCount(instance.getClickCount() + 1);
-    repository.save(instance);
+    service.visit(url);
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302
-    return ResponseEntity.status(HttpStatus.FOUND)
-        .location(URI.create(url.get().getOriginal()))
-        .build();
+    return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(url.getOriginal())).build();
   }
 }

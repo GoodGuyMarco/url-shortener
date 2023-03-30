@@ -5,7 +5,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,7 +16,7 @@ public class RedirectControllerTest {
 
   @Autowired private MockMvc mockMvc;
 
-  @MockBean private ShortUrlRepository repository;
+  @MockBean private ShortUrlService service;
 
   @Test
   public void testRedirect() throws Exception {
@@ -26,7 +25,7 @@ public class RedirectControllerTest {
     url.setShortId("short_id");
     url.setClickCount(0);
 
-    when(repository.findByShortId("short_id")).thenReturn(Optional.of(url));
+    when(service.getByShortId("short_id")).thenReturn(url);
 
     mockMvc
         .perform(get("/short_id"))
@@ -36,7 +35,7 @@ public class RedirectControllerTest {
 
   @Test
   public void testNotFound() throws Exception {
-    when(repository.findByShortId("not_existing_short_id")).thenReturn(Optional.empty());
+    when(service.getByShortId("not_existing_short_id")).thenReturn(null);
 
     mockMvc.perform(get("/not_existing_short_id")).andExpect(status().isNotFound());
   }

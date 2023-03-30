@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
-import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class ShortUrlControllerTest {
 
   @Autowired private MockMvc mockMvc;
 
-  @MockBean private ShortUrlRepository repository;
+  @MockBean private ShortUrlService service;
 
   @Test
   public void testPost() throws Exception {
@@ -50,14 +49,14 @@ public class ShortUrlControllerTest {
 
   @Test
   public void testDelete() throws Exception {
-    when(repository.findById("short_url_id")).thenReturn(Optional.of(new ShortUrl()));
+    when(service.delete("short_url_id")).thenReturn(new ShortUrl());
 
     mockMvc.perform(delete("/url/{id}", "short_url_id")).andExpect(status().isOk());
   }
 
   @Test
   public void testDeleteWithNotFound() throws Exception {
-    when(repository.findById("not_existing_id")).thenReturn(Optional.empty());
+    when(service.delete("not_existing_id")).thenReturn(null);
 
     mockMvc.perform(delete("/url/{id}", "not_existing_id")).andExpect(status().isNotFound());
   }
@@ -71,7 +70,7 @@ public class ShortUrlControllerTest {
     url.setDescription("Lorem ipsum dolor amet.");
     url.setClickCount(0);
 
-    when(repository.findById("id")).thenReturn(Optional.of(url));
+    when(service.getById("id")).thenReturn(url);
 
     MvcResult result =
         mockMvc.perform(get("/url/{id}", "id")).andExpect(status().isOk()).andReturn();
@@ -84,7 +83,7 @@ public class ShortUrlControllerTest {
 
   @Test
   public void testGetWithNotFound() throws Exception {
-    when(repository.findById("not_existing_id")).thenReturn(Optional.empty());
+    when(service.getById("not_existing_id")).thenReturn(null);
 
     mockMvc.perform(get("/url/{id}", "not_existing_id")).andExpect(status().isNotFound());
   }
@@ -107,7 +106,7 @@ public class ShortUrlControllerTest {
 
     List<ShortUrl> urls = List.of(a, b);
 
-    when(repository.findAll()).thenReturn(urls);
+    when(service.getAll()).thenReturn(urls);
 
     MvcResult result = mockMvc.perform(get("/url/")).andExpect(status().isOk()).andReturn();
 
