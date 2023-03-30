@@ -1,5 +1,8 @@
-package de.marco_bartelt.url_shortener;
+package de.marco_bartelt.url_shortener.controller;
 
+import de.marco_bartelt.url_shortener.entity.ShortUrl;
+import de.marco_bartelt.url_shortener.service.ShortUrlService;
+import de.marco_bartelt.url_shortener.dto.CreateShortUrlRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

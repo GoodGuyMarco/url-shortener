@@ -1,5 +1,6 @@
-package de.marco_bartelt.url_shortener;
+package de.marco_bartelt.url_shortener.entity;
 
+import de.marco_bartelt.url_shortener.service.ShortIdGenerator;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import org.hibernate.annotations.ColumnDefault;

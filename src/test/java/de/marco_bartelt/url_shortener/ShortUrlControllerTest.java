@@ -7,6 +7,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.marco_bartelt.url_shortener.controller.ShortUrlController;
+import de.marco_bartelt.url_shortener.dto.CreateShortUrlRequest;
+import de.marco_bartelt.url_shortener.entity.ShortUrl;
+import de.marco_bartelt.url_shortener.service.ShortUrlService;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

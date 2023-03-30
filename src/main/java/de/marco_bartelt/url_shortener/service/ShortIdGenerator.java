@@ -1,4 +1,4 @@
-package de.marco_bartelt.url_shortener;
+package de.marco_bartelt.url_shortener.service;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 

@@ -1,6 +1,9 @@
-package de.marco_bartelt.url_shortener;
+package de.marco_bartelt.url_shortener.controller;
 
 import java.net.URI;
+
+import de.marco_bartelt.url_shortener.entity.ShortUrl;
+import de.marco_bartelt.url_shortener.service.ShortUrlService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,9 @@
-package de.marco_bartelt.url_shortener;
+package de.marco_bartelt.url_shortener.service;
 
 import java.util.Optional;
+
+import de.marco_bartelt.url_shortener.entity.ShortUrl;
+import de.marco_bartelt.url_shortener.repository.ShortUrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
