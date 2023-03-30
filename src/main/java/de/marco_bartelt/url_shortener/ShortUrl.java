@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class ShortUrl {
@@ -19,6 +20,8 @@ public class ShortUrl {
 
   private Integer clickCount;
 
+  private LocalDate createdAt;
+
   public ShortUrl() {}
 
   public ShortUrl(String original, String description) {
@@ -26,6 +29,7 @@ public class ShortUrl {
     this.shortId = ShortIdGenerator.generate();
     this.description = description;
     this.clickCount = 0;
+    this.createdAt = LocalDate.now();
   }
 
   public void visit() {
@@ -70,5 +74,13 @@ public class ShortUrl {
 
   public void setClickCount(Integer clickCount) {
     this.clickCount = clickCount;
+  }
+
+  public LocalDate getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDate createdAt) {
+    this.createdAt = createdAt;
   }
 }
