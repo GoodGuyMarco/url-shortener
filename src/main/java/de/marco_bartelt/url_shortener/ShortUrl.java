@@ -1,24 +1,25 @@
 package de.marco_bartelt.url_shortener;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class ShortUrl {
+
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private String id;
 
   private String original;
 
+  @Column(unique = true)
   private String shortId;
 
   private String description;
 
-  private Integer clickCount;
+  @ColumnDefault("0")
+  private Integer clickCount = 0;
 
   private LocalDate createdAt;
 
@@ -26,9 +27,8 @@ public class ShortUrl {
 
   public ShortUrl(String original, String description) {
     this.original = original;
-    this.shortId = ShortIdGenerator.generate();
     this.description = description;
-    this.clickCount = 0;
+    this.shortId = ShortIdGenerator.generate();
     this.createdAt = LocalDate.now();
   }
 
