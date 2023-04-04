@@ -3,6 +3,7 @@ package de.marco_bartelt.url_shortener.entity;
 import de.marco_bartelt.url_shortener.service.ShortIdGenerator;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
@@ -12,17 +13,19 @@ public class ShortUrl {
   @GeneratedValue(strategy = GenerationType.UUID)
   private String id;
 
-  private String original;
+  @NotNull private String original;
 
+  @NotNull
   @Column(unique = true)
   private String shortId;
 
-  private String description;
+  @NotNull private String description;
 
+  @NotNull
   @ColumnDefault("0")
   private Integer clickCount = 0;
 
-  private LocalDate createdAt;
+  @NotNull private LocalDate createdAt;
 
   public ShortUrl() {}
 

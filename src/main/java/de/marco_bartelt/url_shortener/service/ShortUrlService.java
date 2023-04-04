@@ -14,6 +14,7 @@ public class ShortUrlService {
 
   public ShortUrl visit(ShortUrl url) {
     url.visit();
+
     repository.save(url);
 
     return url;
@@ -28,15 +29,11 @@ public class ShortUrlService {
   }
 
   public ShortUrl getById(String id) {
-    Optional<ShortUrl> url = repository.findById(id);
-
-    return url.orElse(null);
+    return repository.findById(id).orElse(null);
   }
 
   public ShortUrl getByShortId(String shortId) {
-    Optional<ShortUrl> url = repository.findByShortId(shortId);
-
-    return url.orElse(null);
+    return repository.findByShortId(shortId).orElse(null);
   }
 
   public Iterable<ShortUrl> getAll() {
